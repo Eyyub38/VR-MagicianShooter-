@@ -51,45 +51,49 @@
   <ItemGroup>
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Spell\SpellType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
-    <Compile Include="Assets\Scripts\SpellManager.cs" />
+    <Compile Include="Assets\Scripts\Spell\Spell.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\Spell\SpellEffects.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\Scripts\Spell\Data\SpellEffectDB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-    <Compile Include="Assets\Scripts\Spell.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
-    <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Spell\SpellManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\ScoreBoard.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Scripts\ScoreBoard.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-    <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1244,12 +1248,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="VIVE.OpenXR">
       <HintPath>Library\ScriptAssemblies\VIVE.OpenXR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VIVE.OpenXR.Editor">
+      <HintPath>Library\ScriptAssemblies\VIVE.OpenXR.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
@@ -1262,10 +1270,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="VIVE.OpenXR.Editor">
-      <HintPath>Library\ScriptAssemblies\VIVE.OpenXR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
@@ -1341,14 +1345,14 @@
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
     <ProjectReference Include="Unity.FilmInternalUtilities.Editor.csproj" />
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj" />
-    <ProjectReference Include="Unity.XR.Oculus.Editor.csproj" />
     <ProjectReference Include="Unity.Collections.csproj" />
     <ProjectReference Include="Unity.InputSystem.ForUI.csproj" />
+    <ProjectReference Include="Unity.XR.Oculus.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.csproj" />
-    <ProjectReference Include="Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.MetaQuestSupport.csproj" />
     <ProjectReference Include="Unity.Timeline.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj" />
+    <ProjectReference Include="Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.csproj" />
     <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Editor.csproj" />
     <ProjectReference Include="Unity.Burst.csproj" />

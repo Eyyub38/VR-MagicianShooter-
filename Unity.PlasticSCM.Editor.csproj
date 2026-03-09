@@ -67,8 +67,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\CreateWorkspace\PerformInitialCheckin.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\ParentWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UVCSToolbar\Headless\HeadlessWorkspaceWindow.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\UnityInternals\UnityEditor\EditorWindowInternal.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\CloudDrive\Workspaces\Tree\CloudWorkspacesTreeView.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\UnityInternals\UnityEditor\EditorWindowInternal.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\DelayedActionByFramesRunner.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Settings\OpenUVCSProjectSettings.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\EnumPopupSetting.cs" />
@@ -152,8 +152,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\Progress\ProgressControlsForDialogs.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\PendingChanges\Dialogs\DependenciesDialog.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\CloudDrive\Workspaces\DirectoryContent\DrawItemsGridView.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\UnityInternals\UnityEditor\ContainerWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\Labels\LabelsTab_Operations.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\UI\UnityInternals\UnityEditor\ContainerWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\Merge\Developer\MergeTreeView.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\Merge\Developer\DirectoryConflicts\DivergentMoveMenu.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@e566cd3e7623\Editor\Views\CreateWorkspace\Dialogs\RepositoriesListView.cs" />
