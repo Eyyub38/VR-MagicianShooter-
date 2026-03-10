@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class Spell : MonoBehaviour
-{
+public class Spell : MonoBehaviour {
     [SerializeField] SpellType spellType;
     [SerializeField] float speedMultiplier;
 
@@ -14,61 +13,52 @@ public class Spell : MonoBehaviour
 
     public float DamageDealt => damageDealt;
 
-    public void Init()
-    {
+    public void Init() {
         isGrowing = true;
         spellSize = spellType.SpellMinSize;
         transform.localScale = Vector3.zero;
         damageDealt = spellType.SpellDamage;
     }
 
-    void Update()
-    {
+    void Update() {
         transform.position += spellVelocity * Time.deltaTime;
 
-        if (isGrowing)
-        {
+        if(isGrowing) {
             currSize = transform.localScale.x;
-            spellSize = Mathf.MoveTowards(currSize, spellType.SpellMaxSize, spellType.SpellGrowthRate * Time.deltaTime);
+            spellSize = Mathf.MoveTowards( currSize, spellType.SpellMaxSize, spellType.SpellGrowthRate * Time.deltaTime );
             transform.localScale = Vector3.one * spellSize;
         }
     }
 
-    public void Cast(Vector3 direction)
-    {
-        transform.SetParent(null);
+    public void Cast(Vector3 direction) {
+        transform.SetParent( null );
         spellVelocity = direction * currSize * speedMultiplier;
         damageDealt = spellType.SpellDamage * (currSize / spellType.SpellMaxSize);
 
         DestroySpell();
     }
 
-    public void StopCast()
-    {
+    public void StopCast() {
         isGrowing = false;
         transform.localScale = spellSize * Vector3.one;
     }
 
-    void DestroySpell()
-    {
-        Destroy(gameObject, spellType.SpellDuration);
+    void DestroySpell() {
+        Destroy( gameObject, spellType.SpellDuration );
     }
 
-    void OnTriggerEnter(Collider trigger)
-    {
-        if (trigger.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject);
+    void OnTriggerEnter(Collider trigger) {
+        if(trigger.gameObject.CompareTag( "Enemy" )) {
+            spellType.TriggerEffects( trigger.gameObject );
+            Destroy( gameObject );
         }
     }
 
-    public void Tick(float deltaTime)
-    {
+    public void Tick(float deltaTime) {
         //Particle effects and cooldown would go here
     }
 
-    public bool IsReady()
-    {
+    public bool IsReady() {
         //Cooldown and mana checks would go here
         return true;
     }
