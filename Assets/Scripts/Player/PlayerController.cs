@@ -11,22 +11,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject menuUI;
 
-    [SerializeField] Image healthBar;
+    [SerializeField] HealthBar healthBar;
 
-    float healthbarLength;
     float playerHealth;
     float xRotation = 0f;
     float yRotation = 0f;
 
     public float PlayerHealth { get { return playerHealth; } set { playerHealth = value; } }
+    public HealthBar HealthBar => healthBar;
+    public float MaxHealth => maxHealth;
+
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (healthBar != null)
-            healthbarLength = healthBar.rectTransform.sizeDelta.x;
         playerHealth = maxHealth;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(playerHealth, maxHealth);
     }
 
     void Update()
@@ -71,13 +71,6 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         lookAction?.Disable();
-    }
-
-    public void UpdateHealthBar()
-    {
-        float healthRation = playerHealth / maxHealth;
-        healthRation = Mathf.Clamp(healthRation, 0f, 1f);
-        healthBar.rectTransform.sizeDelta = new Vector2(healthbarLength * healthRation, healthBar.rectTransform.sizeDelta.y);
     }
 
     void SetUI(bool playing)

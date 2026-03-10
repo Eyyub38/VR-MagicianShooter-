@@ -5,10 +5,10 @@ using System;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] Enemy enemy;
-    [SerializeField] Image healthBar;
+    [SerializeField] HealthBar healthBar;
     ScoreBoard scoreBoard;
 
-    float healthbarLength;
+    //TODO:Health System will be in sepsrate script file
     float enemyHealth;
 
     float lastHitTime = 0f;
@@ -29,9 +29,8 @@ public class EnemyController : MonoBehaviour
     {
         spawner = GameObject.FindFirstObjectByType<EnemySpawner>();
         target = GameObject.FindFirstObjectByType<PlayerController>();
-        healthbarLength = healthBar.rectTransform.sizeDelta.x;
         enemyHealth = enemy.EnemyMaxHealth;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(enemyHealth, enemy.EnemyMaxHealth);
     }
 
     void Update()
@@ -56,7 +55,7 @@ public class EnemyController : MonoBehaviour
             {
                 GiveDamage();
                 lastHitTime = 0f;
-                target.UpdateHealthBar();
+                target.HealthBar.UpdateHealthBar(target.PlayerHealth, target.MaxHealth);
             }
         }
 
@@ -69,7 +68,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(enemyHealth, enemy.EnemyMaxHealth);
     }
 
     void OnTriggerEnter(Collider trigger)
@@ -98,12 +97,5 @@ public class EnemyController : MonoBehaviour
         scoreBoard.IncreaseScore(points);
         spawner.EnemiesSpawned--;
         spawner.IsAnyEnemyAlive();
-    }
-
-    public void UpdateHealthBar()
-    {
-        float healthRation = enemyHealth / enemy.EnemyMaxHealth;
-        healthRation = Mathf.Clamp(healthRation, 0f, 1f);
-        healthBar.rectTransform.sizeDelta = new Vector2(healthbarLength * healthRation, healthBar.rectTransform.sizeDelta.y);
     }
 }

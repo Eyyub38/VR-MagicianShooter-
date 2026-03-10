@@ -1,6 +1,5 @@
 using UnityEngine;
 
-public enum SpellElement { Fire, Ice, Lightning }
 
 [CreateAssetMenu(fileName = "New Spell Type", menuName = "Spell/Spell Type")]
 public class SpellType : ScriptableObject
@@ -12,8 +11,7 @@ public class SpellType : ScriptableObject
     [SerializeField] float spellDuration;
     [SerializeField] float manaCost;
     [SerializeField] float cooldown;
-    [SerializeField] SpellElement element;
-    //[SerializeField] SpellEffects spellEffect;
+    [SerializeField] SpellID effectID;
 
     // Base Stats
     public float SpellDamage => spellDamage;
@@ -21,9 +19,10 @@ public class SpellType : ScriptableObject
     public float SpellMaxSize => spellMaxSize;
     public float SpellGrowthRate => spellGrowthRate;
     public float SpellDuration => spellDuration;
+    public SpellID EffectID => effectID;
+
 
     // Type and Cost !!TODO: Maybe move these to a separate interface for casting?
-    public SpellElement Element => element;
     public float ManaCost => manaCost;
     public float Cooldown => cooldown;
     //public SpellEffects SpellEffect => spellEffect;

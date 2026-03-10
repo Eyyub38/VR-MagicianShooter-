@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         var player = GameObject.FindFirstObjectByType<PlayerController>();
-        player.PlayerHealth = 10f;
-        player.UpdateHealthBar();
+        player.PlayerHealth = player.MaxHealth;
+        player.HealthBar.UpdateHealthBar(player.PlayerHealth, player.MaxHealth);
 
         var spawner = GameObject.FindFirstObjectByType<EnemySpawner>();
         spawner.CleanEnemies();
