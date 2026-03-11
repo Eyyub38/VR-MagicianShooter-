@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject look;
     [SerializeField] InputAction lookAction;
     [SerializeField] float lookSensitivity = 100f;
@@ -22,32 +21,28 @@ public class PlayerController : MonoBehaviour
     public float MaxHealth => maxHealth;
 
 
-    void Start()
-    {
+    void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         playerHealth = maxHealth;
-        healthBar.UpdateHealthBar(playerHealth, maxHealth);
+        healthBar.UpdateHealthBar( playerHealth, maxHealth );
     }
 
-    void Update()
-    {
-        if (GameManager.i == null)
-        {
-            SetUI(false);
+    void Update() {
+        if(GameManager.i == null) {
+            SetUI( false );
             OnDisable();
             return;
         }
 
-        if (GameManager.i.CurrentGameState != GameStates.Playing)
-        {
-            SetUI(false);
-            menuUI.SetActive(true);
+        if(GameManager.i.CurrentGameState != GameStates.Playing) {
+            SetUI( false );
+            menuUI.SetActive( true );
             OnDisable();
             return;
         }
 
         OnEnable();
-        SetUI(true);
+        SetUI( true );
 
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
 
@@ -57,36 +52,32 @@ public class PlayerController : MonoBehaviour
         xRotation -= lookY;
         yRotation += lookX;
 
-        xRotation = Mathf.Clamp(xRotation, -30f, 30f);
-        yRotation = Mathf.Clamp(yRotation, -60f, 60f);
+        xRotation = Mathf.Clamp( xRotation, -30f, 30f );
+        yRotation = Mathf.Clamp( yRotation, -60f, 60f );
 
-        look.transform.localEulerAngles = new Vector3(xRotation, yRotation, 0f);
+        look.transform.localEulerAngles = new Vector3( xRotation, yRotation, 0f );
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         lookAction?.Enable();
     }
 
-    void OnDisable()
-    {
+    void OnDisable() {
         lookAction?.Disable();
     }
 
-    void SetUI(bool playing)
-    {
-        gameUI?.SetActive(playing);
-        menuUI?.SetActive(!playing);
+    void SetUI(bool playing) {
+        gameUI?.SetActive( playing );
+        menuUI?.SetActive( !playing );
     }
 
-    public void Die()
-    {
-        gameUI.SetActive(false);
-        menuUI?.SetActive(true);
+    public void Die() {
+        gameUI.SetActive( false );
+        menuUI?.SetActive( true );
         GameManager.i.CurrentGameState = GameStates.Menu;
 
         var mm = FindFirstObjectByType<MenuManager>();
-        if (mm != null)
+        if(mm != null)
             mm.ShowMenu();
     }
 }

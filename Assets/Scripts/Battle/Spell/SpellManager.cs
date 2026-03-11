@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpellManager : MonoBehaviour
-{
+public class SpellManager : MonoBehaviour {
     [SerializeField] GameObject spellPrefab;
     [SerializeField] Transform spellSpawnPoint;
     [SerializeField] InputAction castSpellAction;
@@ -12,52 +11,44 @@ public class SpellManager : MonoBehaviour
 
     bool isCasting = false;
 
-    void Update()
-    {
-        if (GameManager.i == null || GameManager.i.CurrentGameState != GameStates.Playing)
+    void Update() {
+        if(GameManager.i == null || GameManager.i.CurrentGameState != GameStates.Playing)
             return;
 
-        if (castSpellAction.WasPressedThisFrame())
-        {
+        if(castSpellAction.WasPressedThisFrame()) {
             ChargeSpell();
         }
 
-        if (castSpellAction.WasReleasedThisFrame() && currSpell != null)
-        {
+        if(castSpellAction.WasReleasedThisFrame() && currSpell != null) {
             CastSpell();
         }
     }
 
-    void ChargeSpell()
-    {
-        if (isCasting)
-        {
+    void ChargeSpell() {
+        if(isCasting) {
             return;
         }
         isCasting = true;
-        GameObject spell = Instantiate(spellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation, spellSpawnPoint);
+        GameObject spell = Instantiate( spellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation, spellSpawnPoint );
         currSpell = spell.GetComponent<Spell>();
         currSpell.Init();
     }
 
-    void CastSpell()
-    {
+    void CastSpell() {
         currSpell.StopCast();
         isCasting = false;
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        Vector3 target = Physics.Raycast(ray, out RaycastHit hit) ? hit.point : ray.GetPoint(50f);
+        Ray ray = mainCamera.ViewportPointToRay( new Vector3( 0.5f, 0.5f, 0f ) );
+        Vector3 target = Physics.Raycast( ray, out RaycastHit hit ) ? hit.point : ray.GetPoint( 50f );
         Vector3 direction = (target - spellSpawnPoint.position).normalized;
 
-        currSpell.Cast(direction);
+        currSpell.Cast( direction );
         currSpell = null;
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         castSpellAction.Enable();
     }
-    void OnDisable()
-    {
+    void OnDisable() {
         castSpellAction.Disable();
     }
 }
