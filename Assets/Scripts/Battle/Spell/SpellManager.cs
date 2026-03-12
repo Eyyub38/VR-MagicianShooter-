@@ -1,54 +1,80 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class SpellManager : MonoBehaviour {
-    [SerializeField] GameObject spellPrefab;
+    [SerializeField] List<GameObject> spellPrefabs;
     [SerializeField] Transform spellSpawnPoint;
-    [SerializeField] InputAction castSpellAction;
     [SerializeField] Camera mainCamera;
+    [SerializeField] InputReader inputReader;
 
+    SpellUI spellUI;
     Spell currSpell;
+    GameObject selectedSpell;
 
     bool isCasting = false;
 
-    void Update() {
-        if(GameManager.i == null || GameManager.i.CurrentGameState != GameStates.Playing)
-            return;
-
-        if(castSpellAction.WasPressedThisFrame()) {
-            ChargeSpell();
-        }
-
-        if(castSpellAction.WasReleasedThisFrame() && currSpell != null) {
-            CastSpell();
-        }
+    void Awake() {
+        spellUI = FindFirstObjectByType<SpellUI>();
     }
 
-    void ChargeSpell() {
-        if(isCasting) {
-            return;
-        }
+    void Start() {
+        SetSpell( 0 );
+        spellUI.SetSpellUI( 0 );
+    }
+
+    void OnEnable() {
+        inputReader.OnSpellSelected += HandleSpellSelection;
+        inputReader.OnStartCast += StartCast;
+        inputReader.OnReleaseCast += ReleaseCast;
+    }
+
+    void OnDisable() {
+        inputReader.OnSpellSelected -= HandleSpellSelection;
+        inputReader.OnStartCast -= StartCast;
+        inputReader.OnReleaseCast -= ReleaseCast;
+    }
+
+    void StartCast() {
+        if(isCasting || GameManager.i.CurrentGameState != GameStates.Playing) return;
         isCasting = true;
-        GameObject spell = Instantiate( spellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation, spellSpawnPoint );
+        GameObject spell = Instantiate( selectedSpell, spellSpawnPoint.position, spellSpawnPoint.rotation, spellSpawnPoint );
         currSpell = spell.GetComponent<Spell>();
         currSpell.Init();
     }
 
-    void CastSpell() {
+    void ReleaseCast() {
+        if(!isCasting || currSpell == null) return;
+        currSpell.transform.SetParent( null );
+
         currSpell.StopCast();
         isCasting = false;
-        Ray ray = mainCamera.ViewportPointToRay( new Vector3( 0.5f, 0.5f, 0f ) );
-        Vector3 target = Physics.Raycast( ray, out RaycastHit hit ) ? hit.point : ray.GetPoint( 50f );
-        Vector3 direction = (target - spellSpawnPoint.position).normalized;
 
+        Vector3 direction = CalculateSpellDirection();
         currSpell.Cast( direction );
         currSpell = null;
     }
 
-    void OnEnable() {
-        castSpellAction.Enable();
+    Vector3 CalculateSpellDirection() {
+        if(UnityEngine.XR.XRSettings.isDeviceActive) {
+            return spellSpawnPoint.forward;
+        } else {
+            Ray ray = mainCamera.ViewportPointToRay( new Vector3( 0.5f, 0.5f, 0f ) );
+            if(Physics.Raycast( ray, out RaycastHit hit )) {
+                return (hit.point - spellSpawnPoint.position).normalized;
+            }
+            return mainCamera.transform.forward;
+        }
     }
-    void OnDisable() {
-        castSpellAction.Disable();
+
+    void HandleSpellSelection(int index) {
+        if(index >= 0 && index < spellPrefabs.Count) {
+            selectedSpell = spellPrefabs[index].gameObject;
+            spellUI.SetSpellUI( index );
+        }
     }
+    void SetSpell(int index) {
+        selectedSpell = spellPrefabs[index].gameObject;
+    }
+
 }

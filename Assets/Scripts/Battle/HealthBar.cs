@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
@@ -14,5 +15,11 @@ public class HealthBar : MonoBehaviour {
         float healthRation = health / maxHealth;
         healthRation = Mathf.Clamp( healthRation, 0f, 1f );
         healthBar.rectTransform.sizeDelta = new Vector2( healthbarLength * healthRation, healthBar.rectTransform.sizeDelta.y );
+    }
+
+    void LateUpdate() {
+        if(transform.parent != null && XRSettings.isDeviceActive) {
+            transform.LookAt(transform.parent.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+        }
     }
 }

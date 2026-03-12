@@ -6,9 +6,15 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] int numEnemiesToSpawn = 5;
     [SerializeField] float spawnInterval = 2f;
 
+    [Header( "Size of Spawner" )]
+    [SerializeField] float sizeX = 25;
+    [SerializeField] float sizeZ = 15;
+
     int enemiesSpawned = 0;
     float timeSinceLastSpawn = 0f;
     bool isEnemiesAlive = true;
+
+    //TODO: Enemy Types and new spawn algorithm variables will be added
 
     public int EnemiesSpawned { get; set; }
 
@@ -38,8 +44,8 @@ public class EnemySpawner : MonoBehaviour {
 
     void SpawnOneEnemy() {
         var spawnerPos = transform.position;
-        float spawnX = Random.Range( spawnerPos.x - 25f, spawnerPos.x + 25f );
-        float spawnZ = Random.Range( spawnerPos.z - 20f, spawnerPos.z + 20f );
+        float spawnX = Random.Range( spawnerPos.x - sizeX, spawnerPos.x + sizeX );
+        float spawnZ = Random.Range( spawnerPos.z - sizeZ, spawnerPos.z + sizeZ );
 
         Vector3 spawnPos = new Vector3( spawnX, 1f, spawnZ );
         Instantiate( enemyPrefab, spawnPos, Quaternion.identity );
