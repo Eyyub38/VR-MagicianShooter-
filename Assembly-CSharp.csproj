@@ -86,6 +86,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Battle\Spell\Effects\ExplosionEffect.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemy\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Battle\Spell\Effects\EnemyElementProcessor.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Battle\Spell\SpellType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Battle\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\Battle\Spell\Effects\ElementEffects.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Gameplay\MenuManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

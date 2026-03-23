@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum EnemyType { Normal, Brute, Fast }
+public enum EnemyType { Magma, Blizzard, Magnet }
 
 [CreateAssetMenu( fileName = "New Enemy", menuName = "Enemy" )]
 public class Enemy : ScriptableObject {
@@ -11,6 +11,11 @@ public class Enemy : ScriptableObject {
     [SerializeField] float damage = 1f;
     [SerializeField] float hitCooldown = 1f;
     [SerializeField] float pointGian = 1f;
+    [SerializeField] ElementData weakness;
+    [SerializeField] ElementData resistance;
+
+    [Range( 0, 100 )]
+    [SerializeField] int sapwnWeight = 50;
 
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     public float EnemyMaxHealth => enemyMaxHealth;
@@ -18,4 +23,7 @@ public class Enemy : ScriptableObject {
     public float Damage => damage;
     public float HitCooldown => hitCooldown;
     public float PointGain => pointGian;
+    public ElementData Weakness => weakness;
+    public ElementData Resistance => resistance;
+    public int SpawnWeight => sapwnWeight;
 }

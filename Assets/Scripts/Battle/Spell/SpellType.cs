@@ -10,6 +10,7 @@ public class SpellType : ScriptableObject {
     [SerializeField] float spellDuration;
     [SerializeField] float manaCost;
     [SerializeField] float cooldown;
+    [SerializeField] ElementData element;
 
     [SerializeField] List<SpellEffect> effects;
 
@@ -19,6 +20,7 @@ public class SpellType : ScriptableObject {
     public float SpellMaxSize => spellMaxSize;
     public float SpellGrowthRate => spellGrowthRate;
     public float SpellDuration => spellDuration;
+    public ElementData Element => element;
 
 
     // Type and Cost !!TODO: Maybe move these to a separate interface for casting?
@@ -28,6 +30,10 @@ public class SpellType : ScriptableObject {
     public void TriggerEffects(GameObject target) {
         foreach(var effect in effects) {
             effect.Apply( target );
+        }
+
+        if(target.TryGetComponent<EnemyElementProcessor>( out var processor )) {
+            processor.OnHit( element );
         }
     }
 }

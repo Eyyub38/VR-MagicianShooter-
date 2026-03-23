@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour {
     Player target;
 
     public float EnemyHealth { get { return enemyHealth; } set { enemyHealth = value; } }
+    public Enemy Enemy { get { return enemy; } set { enemy = value; } }
+
 
     public static event Action<float> OnDeath;
 
@@ -63,8 +65,17 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(float damage) {
-        enemyHealth -= damage;
+    public void TakeDamage(float damage, ElementData element = null) {
+        float finalDamage = damage;
+        if(element != null) {
+            if(element == enemy.Weakness) {
+                finalDamage *= 2;
+            } else if(element == enemy.Resistance) {
+                finalDamage /= 2;
+            }
+        }
+
+        enemyHealth -= finalDamage;
         healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
     }
 
@@ -111,6 +122,17 @@ public class EnemyController : MonoBehaviour {
             TakeDamage( damage );
             yield return new WaitForSeconds( period );
             time += period;
+        }
+    }
+
+    public void SetEnemyType(Enemy enemyData) {
+        this.enemy = enemyData;
+
+        this.enemyHealth = enemy.EnemyMaxHealth;
+        this.currSpeed = enemy.MoveSpeed;
+
+        if(healthBar != null) {
+            healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
         }
     }
 }
