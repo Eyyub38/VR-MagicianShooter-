@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour {
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] List<Enemy> enemies;
+    [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] int numEnemiesToSpawn = 5;
     [SerializeField] float spawnInterval = 2f;
 
@@ -21,8 +20,6 @@ public class EnemySpawner : MonoBehaviour {
     public int EnemiesSpawned { get; set; }
 
     void Update() {
-        if(enemyPrefab == null)
-            return;
         if(GameManager.i == null) {
             Debug.LogWarning( "EnemySpawner: GameManager.i is null - skipping update" );
             return;
@@ -49,13 +46,8 @@ public class EnemySpawner : MonoBehaviour {
         float spawnX = Random.Range( spawnerPos.x - sizeX, spawnerPos.x + sizeX );
         float spawnZ = Random.Range( spawnerPos.z - sizeZ, spawnerPos.z + sizeZ );
 
-        Enemy enemy = GetRandomEnemy();
-
-        GameObject newEnemy = Instantiate( enemyPrefab, new Vector3( spawnX, 1f, spawnZ ), Quaternion.identity );
-        newEnemy.GetComponent<EnemyController>().Enemy = enemy;
-
-        Vector3 spawnPos = new Vector3( spawnX, 1f, spawnZ );
-        Instantiate( enemyPrefab, spawnPos, Quaternion.identity );
+        int index = Random.Range( 0, enemyPrefabs.Count );
+        GameObject newEnemy = Instantiate( enemyPrefabs[index], new Vector3( spawnX, 0f, spawnZ ), Quaternion.identity );
         enemiesSpawned++;
     }
 
@@ -64,24 +56,6 @@ public class EnemySpawner : MonoBehaviour {
         if(!isEnemiesAlive) {
             enemiesSpawned = 0;
         }
-    }
-
-    Enemy GetRandomEnemy() {
-        int totalWeight = 0;
-        foreach(var enemy in enemies) {
-            totalWeight += enemy.SpawnWeight;
-        }
-
-        int random = Random.Range( 0, totalWeight );
-        int weight = 0;
-
-        foreach(var enemy in enemies) {
-            weight += enemy.SpawnWeight;
-            if(random <= weight) {
-                return enemy;
-            }
-        }
-        return enemies[0];
     }
 
     public void CleanEnemies() {

@@ -12,6 +12,7 @@ public class Spell : MonoBehaviour {
     Vector3 spellVelocity;
 
     public float DamageDealt => damageDealt;
+    public SpellType SpellType => spellType;
 
     public void Init() {
         isGrowing = true;

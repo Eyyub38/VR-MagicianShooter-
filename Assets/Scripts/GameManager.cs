@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RestartGame() {
-
         var player = GameObject.FindFirstObjectByType<Player>();
         player.PlayerHealth = player.MaxHealth;
         player.HealthBar.UpdateHealthBar( player.PlayerHealth, player.MaxHealth );
@@ -29,6 +28,7 @@ public class GameManager : MonoBehaviour {
 
         scoreBoard.ResetScore();
         CurrentGameState = GameStates.Playing;
+        Cursor.lockState = CursorLockMode.Locked;
         OnStateChanged?.Invoke( CurrentGameState );
     }
 }

@@ -15,9 +15,7 @@
   <Project Path="HTC.ViveInputUtility.csproj" />
   <Project Path="Unity.Tutorials.Core.Editor.csproj" />
   <Project Path="Unity.VisualScripting.Flow.Editor.csproj" />
-  <Project Path="Unity.AI.Search.Editor.csproj" />
   <Project Path="Unity.VisualStudio.Editor.csproj" />
-  <Project Path="Unity.XR.Oculus.Editor.csproj" />
   <Project Path="Unity.Timeline.Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Editor.csproj" />
   <Project Path="Unity.InferenceEngine.csproj" />
@@ -38,6 +36,7 @@
   <Project Path="Unity.FilmInternalUtilities.csproj" />
   <Project Path="Unity.AI.ModelSelector.csproj" />
   <Project Path="Unity.AI.Animate.csproj" />
+  <Project Path="Unity.AI.Assistant.Tools.Editor.csproj" />
   <Project Path="HTC.ViveInputUtility.Editor.csproj" />
   <Project Path="glTFast.Export.csproj" />
   <Project Path="Unity.AppUI.Navigation.Editor.csproj" />
@@ -49,6 +48,7 @@
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="Unity.VisualScripting.State.Editor.csproj" />
   <Project Path="Unity.AI.Assistant.Integrations.Profiler.Editor.csproj" />
+  <Project Path="Unity.AI.Search.Editor.csproj" />
   <Project Path="Unity.AppUI.Redux.csproj" />
   <Project Path="Unity.AI.Assistant.Agent.Dynamic.Extension.Editor.csproj" />
   <Project Path="Unity.Collections.csproj" />
@@ -71,8 +71,6 @@
   <Project Path="Unity.XR.Interaction.Toolkit.Analytics.Editor.csproj" />
   <Project Path="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.csproj" />
   <Project Path="Unity.XR.Management.Editor.csproj" />
-  <Project Path="Unity.AI.Assistant.Tools.Editor.csproj" />
-  <Project Path="Unity.XR.Oculus.csproj" />
   <Project Path="Unity.AppUI.Navigation.csproj" />
   <Project Path="Unity.AI.Generators.Asset.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.CodeSamples.Tests.csproj" />
@@ -99,6 +97,7 @@
   <Project Path="Unity.AppUI.Undo.csproj" />
   <Project Path="Unity.EditorCoroutines.Editor.csproj" />
   <Project Path="Unity.InferenceEngine.Editor.Visualizer.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Unity.AI.Navigation.csproj" />
   <Project Path="Unity.Mathematics.Editor.csproj" />
   <Project Path="UnityEditor.XR.LegacyInputHelpers.csproj" />

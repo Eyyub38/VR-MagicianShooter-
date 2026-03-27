@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour {
         target = GameObject.FindFirstObjectByType<Player>();
         enemyHealth = enemy.EnemyMaxHealth;
         healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
+
     }
 
     void Update() {
@@ -45,8 +46,9 @@ public class EnemyController : MonoBehaviour {
         }
 
         var targetPos = target.transform.position;
-        Vector3 targetDistance = targetPos - transform.position;
-        Vector3 direction = (targetPos - transform.position).normalized;
+        FacePlayer( target.transform );
+        Vector3 targetDistance = new Vector3( targetPos.x - transform.position.x, 0f, targetPos.z - transform.position.z );
+        Vector3 direction = (targetDistance).normalized;
         if(targetDistance.magnitude >= enemy.MinDistanceToTarget) {
             transform.position += direction * currSpeed * Time.deltaTime;
         }
@@ -65,24 +67,25 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(float damage, ElementData element = null) {
+    public void TakeDamage(float damage) {
         float finalDamage = damage;
-        if(element != null) {
-            if(element == enemy.Weakness) {
-                finalDamage *= 2;
-            } else if(element == enemy.Resistance) {
-                finalDamage /= 2;
-            }
-        }
 
         enemyHealth -= finalDamage;
+        healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
+    }
+
+    public void TakeDamage(Spell spell) {
+        float damage = spell.DamageDealt;
+        SpellElementChart chart = new SpellElementChart();
+        damage *= chart.GetDamageMultiplier( enemy.Element, spell.SpellType.Element );
+        enemyHealth -= damage;
         healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
     }
 
     void OnTriggerEnter(Collider trigger) {
         if(trigger.gameObject.CompareTag( "Spell" )) {
             Spell spell = trigger.gameObject.GetComponent<Spell>();
-            TakeDamage( spell.DamageDealt );
+            TakeDamage( spell );
         }
     }
 
@@ -125,14 +128,8 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void SetEnemyType(Enemy enemyData) {
-        this.enemy = enemyData;
-
-        this.enemyHealth = enemy.EnemyMaxHealth;
-        this.currSpeed = enemy.MoveSpeed;
-
-        if(healthBar != null) {
-            healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
-        }
+    void FacePlayer(Transform target) {
+        Vector3 targetPos = new Vector3( target.position.x, transform.position.y / 2, target.position.z );
+        transform.LookAt( targetPos );
     }
 }
