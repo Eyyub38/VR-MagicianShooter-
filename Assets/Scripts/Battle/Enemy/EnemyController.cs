@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour {
     ScoreBoard scoreBoard;
     EnemySpawner spawner;
     Player target;
+    SpellElementChart spellElementChart;
 
     public float EnemyHealth { get { return enemyHealth; } set { enemyHealth = value; } }
     public Enemy Enemy { get { return enemy; } set { enemy = value; } }
@@ -32,7 +33,7 @@ public class EnemyController : MonoBehaviour {
         target = GameObject.FindFirstObjectByType<Player>();
         enemyHealth = enemy.EnemyMaxHealth;
         healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
-
+        spellElementChart = new SpellElementChart();
     }
 
     void Update() {
@@ -76,8 +77,9 @@ public class EnemyController : MonoBehaviour {
 
     public void TakeDamage(Spell spell) {
         float damage = spell.DamageDealt;
-        SpellElementChart chart = new SpellElementChart();
-        damage *= chart.GetDamageMultiplier( enemy.Element, spell.SpellType.Element );
+        float multiplier = spellElementChart.GetDamageMultiplier( enemy.Element, spell.SpellType.Element );
+
+        damage *= multiplier;
         enemyHealth -= damage;
         healthBar.UpdateHealthBar( enemyHealth, enemy.EnemyMaxHealth );
     }

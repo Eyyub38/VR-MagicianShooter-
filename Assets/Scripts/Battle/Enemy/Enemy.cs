@@ -15,11 +15,11 @@ public class Enemy : ScriptableObject {
     [SerializeField] ElementID element;
 
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public ElementID Element { get { return element; } set { element = value; } }
     public float EnemyMaxHealth => enemyMaxHealth;
     public float MinDistanceToTarget => minDistanceToTarget;
     public float Damage => damage;
     public float HitCooldown => hitCooldown;
     public float PointGain => pointGian;
     public int SpawnWeight => sapwnWeight;
-    public ElementID Element => element;
 }

@@ -19,35 +19,18 @@ public class EnemySpawner : MonoBehaviour {
 
     public int EnemiesSpawned { get; set; }
 
-    void Update() {
-        if(GameManager.i == null) {
-            Debug.LogWarning( "EnemySpawner: GameManager.i is null - skipping update" );
-            return;
-        }
-        if(GameManager.i.CurrentGameState != GameStates.Playing)
-            return;
-
-        timeSinceLastSpawn += Time.deltaTime;
-
-        isEnemiesAlive = GameObject.FindGameObjectsWithTag( "Enemy" ).Length > 0;
-
-        if(!isEnemiesAlive && enemiesSpawned >= numEnemiesToSpawn) {
-            enemiesSpawned = 0;
-        }
-
-        if(enemiesSpawned < numEnemiesToSpawn && timeSinceLastSpawn >= spawnInterval) {
-            SpawnOneEnemy();
-            timeSinceLastSpawn -= spawnInterval;
-        }
-    }
-
-    void SpawnOneEnemy() {
+    public void SpawnOneEnemy(ElementID element) {
         var spawnerPos = transform.position;
         float spawnX = Random.Range( spawnerPos.x - sizeX, spawnerPos.x + sizeX );
         float spawnZ = Random.Range( spawnerPos.z - sizeZ, spawnerPos.z + sizeZ );
 
-        int index = Random.Range( 0, enemyPrefabs.Count );
-        GameObject newEnemy = Instantiate( enemyPrefabs[index], new Vector3( spawnX, 0f, spawnZ ), Quaternion.identity );
+        GameObject enemyPrefab = GetPrefabFromType( new Enemy { Element = element } );
+        if(enemyPrefab == null) {
+            Debug.LogError( "EnemySpawner: No prefab found for element: " + element );
+            return;
+        }
+
+        GameObject newEnemy = Instantiate( enemyPrefab, new Vector3( spawnX, 0f, spawnZ ), Quaternion.identity );
         enemiesSpawned++;
     }
 
@@ -62,6 +45,23 @@ public class EnemySpawner : MonoBehaviour {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag( "Enemy" );
         foreach(GameObject enemy in enemies) {
             Destroy( enemy );
+        }
+    }
+
+    public GameObject GetPrefabFromType(Enemy enemy) {
+        switch(enemy.Element) {
+            case ElementID.Fire:
+                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Fire );
+            case ElementID.Ice:
+                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Ice );
+            case ElementID.Wind:
+                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Wind );
+            case ElementID.Lightning:
+                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Lightning );
+            case ElementID.Earth:
+                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Earth );
+            default:
+                return null;
         }
     }
 }
