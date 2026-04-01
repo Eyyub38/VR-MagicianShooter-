@@ -172,107 +172,9 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select1"",
-                    ""type"": ""Button"",
-                    ""id"": ""f99a4abc-8363-4054-a30e-8817253ebada"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select2"",
-                    ""type"": ""Button"",
-                    ""id"": ""6a9cafa0-4c41-4fa6-ab74-85e69e9aeefe"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select3"",
-                    ""type"": ""Button"",
-                    ""id"": ""fc56fff5-fac8-4e5d-b82e-79e7a7451818"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select4"",
-                    ""type"": ""Button"",
-                    ""id"": ""0d0a847a-82fd-439f-8cdc-f0f175f25227"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select5"",
-                    ""type"": ""Button"",
-                    ""id"": ""2ce0858b-ff65-489b-bc84-c6cb97af8297"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Select6"",
-                    ""type"": ""Button"",
-                    ""id"": ""42160e6a-4139-4dda-82d0-2ec155d329a3"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5ac729c8-3b13-4c8c-bd2c-f3a602c0ed24"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c6215fb8-425f-4518-acc0-5d4fdc905fce"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eeb943b5-0d1a-4549-aa85-e0c397bcdf4a"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eac35354-0b9b-4727-9e29-17341f81e5a0"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""ed86b9b9-59cf-42bc-b1e5-c17340fe1eef"",
@@ -281,28 +183,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c30eb283-3014-41f0-8916-28553f6e817d"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select5"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cd41907b-2c9e-4fdd-af3b-a987414af6c9"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select6"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -365,12 +245,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
         // Spell
         m_Spell = asset.FindActionMap("Spell", throwIfNotFound: true);
         m_Spell_Cast = m_Spell.FindAction("Cast", throwIfNotFound: true);
-        m_Spell_Select1 = m_Spell.FindAction("Select1", throwIfNotFound: true);
-        m_Spell_Select2 = m_Spell.FindAction("Select2", throwIfNotFound: true);
-        m_Spell_Select3 = m_Spell.FindAction("Select3", throwIfNotFound: true);
-        m_Spell_Select4 = m_Spell.FindAction("Select4", throwIfNotFound: true);
-        m_Spell_Select5 = m_Spell.FindAction("Select5", throwIfNotFound: true);
-        m_Spell_Select6 = m_Spell.FindAction("Select6", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -554,12 +428,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Spell;
     private List<ISpellActions> m_SpellActionsCallbackInterfaces = new List<ISpellActions>();
     private readonly InputAction m_Spell_Cast;
-    private readonly InputAction m_Spell_Select1;
-    private readonly InputAction m_Spell_Select2;
-    private readonly InputAction m_Spell_Select3;
-    private readonly InputAction m_Spell_Select4;
-    private readonly InputAction m_Spell_Select5;
-    private readonly InputAction m_Spell_Select6;
     /// <summary>
     /// Provides access to input actions defined in input action map "Spell".
     /// </summary>
@@ -575,30 +443,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Spell/Cast".
         /// </summary>
         public InputAction @Cast => m_Wrapper.m_Spell_Cast;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select1".
-        /// </summary>
-        public InputAction @Select1 => m_Wrapper.m_Spell_Select1;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select2".
-        /// </summary>
-        public InputAction @Select2 => m_Wrapper.m_Spell_Select2;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select3".
-        /// </summary>
-        public InputAction @Select3 => m_Wrapper.m_Spell_Select3;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select4".
-        /// </summary>
-        public InputAction @Select4 => m_Wrapper.m_Spell_Select4;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select5".
-        /// </summary>
-        public InputAction @Select5 => m_Wrapper.m_Spell_Select5;
-        /// <summary>
-        /// Provides access to the underlying input action "Spell/Select6".
-        /// </summary>
-        public InputAction @Select6 => m_Wrapper.m_Spell_Select6;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -628,24 +472,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
             @Cast.started += instance.OnCast;
             @Cast.performed += instance.OnCast;
             @Cast.canceled += instance.OnCast;
-            @Select1.started += instance.OnSelect1;
-            @Select1.performed += instance.OnSelect1;
-            @Select1.canceled += instance.OnSelect1;
-            @Select2.started += instance.OnSelect2;
-            @Select2.performed += instance.OnSelect2;
-            @Select2.canceled += instance.OnSelect2;
-            @Select3.started += instance.OnSelect3;
-            @Select3.performed += instance.OnSelect3;
-            @Select3.canceled += instance.OnSelect3;
-            @Select4.started += instance.OnSelect4;
-            @Select4.performed += instance.OnSelect4;
-            @Select4.canceled += instance.OnSelect4;
-            @Select5.started += instance.OnSelect5;
-            @Select5.performed += instance.OnSelect5;
-            @Select5.canceled += instance.OnSelect5;
-            @Select6.started += instance.OnSelect6;
-            @Select6.performed += instance.OnSelect6;
-            @Select6.canceled += instance.OnSelect6;
         }
 
         /// <summary>
@@ -660,24 +486,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
             @Cast.started -= instance.OnCast;
             @Cast.performed -= instance.OnCast;
             @Cast.canceled -= instance.OnCast;
-            @Select1.started -= instance.OnSelect1;
-            @Select1.performed -= instance.OnSelect1;
-            @Select1.canceled -= instance.OnSelect1;
-            @Select2.started -= instance.OnSelect2;
-            @Select2.performed -= instance.OnSelect2;
-            @Select2.canceled -= instance.OnSelect2;
-            @Select3.started -= instance.OnSelect3;
-            @Select3.performed -= instance.OnSelect3;
-            @Select3.canceled -= instance.OnSelect3;
-            @Select4.started -= instance.OnSelect4;
-            @Select4.performed -= instance.OnSelect4;
-            @Select4.canceled -= instance.OnSelect4;
-            @Select5.started -= instance.OnSelect5;
-            @Select5.performed -= instance.OnSelect5;
-            @Select5.canceled -= instance.OnSelect5;
-            @Select6.started -= instance.OnSelect6;
-            @Select6.performed -= instance.OnSelect6;
-            @Select6.canceled -= instance.OnSelect6;
         }
 
         /// <summary>
@@ -847,48 +655,6 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCast(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect1(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect2(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect3(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect4(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select5" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect5(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Select6" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelect6(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

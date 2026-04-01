@@ -7,10 +7,14 @@ public class SpellManager : MonoBehaviour {
     [SerializeField] Transform spellSpawnPoint;
     [SerializeField] Camera mainCamera;
     [SerializeField] InputReader inputReader;
+    [SerializeField] SpellMachine spellMachine;
 
     SpellUI spellUI;
     Spell currSpell;
     GameObject selectedSpell;
+
+    SpellData spellData;
+    SpellData nextSpellData;
 
     bool isCasting = false;
 
@@ -19,40 +23,56 @@ public class SpellManager : MonoBehaviour {
     }
 
     void Start() {
-        SetSpell( 0 );
-        spellUI.SetSpellUI( 0 );
+        nextSpellData = spellMachine.GetRandomSpellData();
     }
 
     void OnEnable() {
-        inputReader.OnSpellSelected += HandleSpellSelection;
         inputReader.OnStartCast += StartCast;
         inputReader.OnReleaseCast += ReleaseCast;
     }
 
     void OnDisable() {
-        inputReader.OnSpellSelected -= HandleSpellSelection;
         inputReader.OnStartCast -= StartCast;
         inputReader.OnReleaseCast -= ReleaseCast;
     }
 
+    void AssignNextSpell() {
+        spellData = nextSpellData;
+        nextSpellData = spellMachine.GetRandomSpellData();
+    }
+
     void StartCast() {
         if(isCasting || GameManager.i.CurrentGameState != GameStates.Playing) return;
+        if(spellData == null) {
+            AssignNextSpell();
+            if(spellData == null) return;
+        }
+
         isCasting = true;
+        selectedSpell = GetPrefabByElement( spellData.element );
+
         GameObject spell = Instantiate( selectedSpell, spellSpawnPoint.position, spellSpawnPoint.rotation, spellSpawnPoint );
         currSpell = spell.GetComponent<Spell>();
         currSpell.Init();
+        spellUI.SetSpellUI( currSpell.SpellType.SpellIcon );
+        spellUI.SetNextSpellUI( nextSpellData != null ? nextSpellData.element : ElementID.None );
     }
 
     void ReleaseCast() {
         if(!isCasting || currSpell == null) return;
-        currSpell.transform.SetParent( null );
 
+        currSpell.transform.SetParent( null );
         currSpell.StopCast();
-        isCasting = false;
 
         Vector3 direction = CalculateSpellDirection();
         currSpell.Cast( direction );
+
+        spellMachine.ConsumeSpellData( spellData );
+
+        AssignNextSpell();
+
         currSpell = null;
+        isCasting = false;
     }
 
     Vector3 CalculateSpellDirection() {
@@ -67,14 +87,10 @@ public class SpellManager : MonoBehaviour {
         }
     }
 
-    void HandleSpellSelection(int index) {
-        if(index >= 0 && index < spellPrefabs.Count) {
-            selectedSpell = spellPrefabs[index].gameObject;
-            spellUI.SetSpellUI( index );
-        }
+    GameObject GetPrefabByElement(ElementID element) {
+        return spellPrefabs.Find( prefab => {
+            Spell spellComponent = prefab.GetComponent<Spell>();
+            return spellComponent != null && spellComponent.SpellType.Element == element;
+        } );
     }
-    void SetSpell(int index) {
-        selectedSpell = spellPrefabs[index].gameObject;
-    }
-
 }

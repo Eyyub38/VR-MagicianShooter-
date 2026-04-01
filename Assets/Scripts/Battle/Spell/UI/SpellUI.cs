@@ -4,29 +4,25 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class SpellUI : MonoBehaviour {
-    [SerializeField] List<Image> spellImages;
-    [SerializeField] Color unSelectedColor;
+    [SerializeField] Image spellUIImage;
+    [SerializeField] Image nextSpellUIImage;
+    [SerializeField] Sprite noneSprite;
 
-    List<Color> originalColor;
 
-    void Awake() {
-        originalColor = new List<Color>();
-        TakeOriginalColors();
+    public void SetSpellUI(Sprite spellIcon) {
+        if(spellIcon == null) {
+            spellUIImage.sprite = noneSprite;
+            return;
+        }
+        spellUIImage.sprite = spellIcon;
     }
 
-    void TakeOriginalColors() {
-        for(int i = 0; i < spellImages.Count; i++) {
-            originalColor.Add( spellImages[i].color );
+    public void SetNextSpellUI(ElementID element) {
+        if(element == ElementID.None) {
+            nextSpellUIImage.sprite = noneSprite;
+            return;
         }
-    }
-
-    public void SetSpellUI(int index) {
-        for(int i = 0; i < spellImages.Count; i++) {
-            if(i != index) {
-                spellImages[i].color = unSelectedColor;
-            } else {
-                spellImages[i].color = originalColor[i];
-            }
-        }
+        SpellMachine.i.spellCache.TryGetValue( element, out SpellType spellType );
+        nextSpellUIImage.sprite = spellType.SpellIcon;
     }
 }

@@ -6,7 +6,6 @@ public class InputReader : ScriptableObject, GameInputs.IPlayerActions, GameInpu
     GameInputs inputActions;
 
     public event System.Action<Vector2> OnLookInitiated;
-    public event System.Action<int> OnSpellSelected;
     public event System.Action OnStartCast;
     public event System.Action OnReleaseCast;
 
@@ -27,25 +26,7 @@ public class InputReader : ScriptableObject, GameInputs.IPlayerActions, GameInpu
     public void OnLook(InputAction.CallbackContext callbackContext) {
         OnLookInitiated?.Invoke( callbackContext.ReadValue<Vector2>() );
     }
-
-    public void OnSelect1(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 0 );
-    }
-    public void OnSelect2(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 1 );
-    }
-    public void OnSelect3(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 2 );
-    }
-    public void OnSelect4(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 3 );
-    }
-    public void OnSelect5(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 4 );
-    }
-    public void OnSelect6(InputAction.CallbackContext callbackContext) {
-        OnSpellSelected?.Invoke( 5 );
-    }
+    
     public void OnCast(InputAction.CallbackContext callbackContext) {
         if(callbackContext.started) OnStartCast?.Invoke();
         else if(callbackContext.canceled) OnReleaseCast?.Invoke();

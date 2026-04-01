@@ -4,27 +4,26 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour {
     [SerializeField] List<GameObject> enemyPrefabs;
-    [SerializeField] int numEnemiesToSpawn = 5;
-    [SerializeField] float spawnInterval = 2f;
 
     [Header( "Size of Spawner" )]
     [SerializeField] float sizeX = 25;
     [SerializeField] float sizeZ = 15;
 
     int enemiesSpawned = 0;
-    float timeSinceLastSpawn = 0f;
-    bool isEnemiesAlive = true;
+    bool isEnemiesAlive = false;
 
-    //TODO: Enemy Types and new spawn algorithm variables will be added
-
-    public int EnemiesSpawned { get; set; }
+    public bool IsEnemiesAlive => isEnemiesAlive;
+    public int EnemiesSpawned {
+        get => enemiesSpawned;
+        set => enemiesSpawned = value;
+    }
 
     public void SpawnOneEnemy(ElementID element) {
         var spawnerPos = transform.position;
         float spawnX = Random.Range( spawnerPos.x - sizeX, spawnerPos.x + sizeX );
         float spawnZ = Random.Range( spawnerPos.z - sizeZ, spawnerPos.z + sizeZ );
 
-        GameObject enemyPrefab = GetPrefabFromType( new Enemy { Element = element } );
+        GameObject enemyPrefab = GetPrefabFromType( element );
         if(enemyPrefab == null) {
             Debug.LogError( "EnemySpawner: No prefab found for element: " + element );
             return;
@@ -48,20 +47,10 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
 
-    public GameObject GetPrefabFromType(Enemy enemy) {
-        switch(enemy.Element) {
-            case ElementID.Fire:
-                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Fire );
-            case ElementID.Ice:
-                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Ice );
-            case ElementID.Wind:
-                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Wind );
-            case ElementID.Lightning:
-                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Lightning );
-            case ElementID.Earth:
-                return enemyPrefabs.Find( prefab => prefab.GetComponent<Enemy>().Element == ElementID.Earth );
-            default:
-                return null;
-        }
+    public GameObject GetPrefabFromType(ElementID element) {
+        return enemyPrefabs.Find( prefab => {
+            EnemyController enemyComponent = prefab.GetComponent<EnemyController>();
+            return enemyComponent != null && enemyComponent.Enemy.Element == element;
+        } );
     }
 }

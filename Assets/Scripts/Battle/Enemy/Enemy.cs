@@ -7,10 +7,8 @@ public class Enemy : ScriptableObject {
     [SerializeField] float minDistanceToTarget = 1f;
     [SerializeField] float damage = 1f;
     [SerializeField] float hitCooldown = 1f;
-    [SerializeField] float pointGian = 1f;
+    [SerializeField] float pointGain = 1f;
 
-    [Range( 0, 100 )]
-    [SerializeField] int sapwnWeight = 50;
 
     [SerializeField] ElementID element;
 
@@ -20,6 +18,5 @@ public class Enemy : ScriptableObject {
     public float MinDistanceToTarget => minDistanceToTarget;
     public float Damage => damage;
     public float HitCooldown => hitCooldown;
-    public float PointGain => pointGian;
-    public int SpawnWeight => sapwnWeight;
+    public float PointGain => pointGain;
 }

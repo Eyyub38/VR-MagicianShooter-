@@ -12,6 +12,7 @@ public class SpellType : ScriptableObject {
     [SerializeField] float spellMaxSize;
     [SerializeField] float spellGrowthRate;
     [SerializeField] float spellDuration;
+    [SerializeField] Sprite spellIcon;
 
     [SerializeField] ElementID element;
     [SerializeField] List<SpellEffect> effects;
@@ -22,6 +23,7 @@ public class SpellType : ScriptableObject {
     public float SpellGrowthRate => spellGrowthRate;
     public float SpellDuration => spellDuration;
     public ElementID Element => element;
+    public Sprite SpellIcon => spellIcon;
 
     public void TriggerEffects(GameObject target) {
         foreach(var effect in effects) {
